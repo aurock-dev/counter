@@ -1,11 +1,13 @@
 <script setup>
-import { ref } from 'vue'
+import { ref, onMounted } from 'vue'
 import { RotateCwSquare, Trash2 } from 'lucide-vue-next'
+import { settingsStore } from '@/store/settings'
 
 const props = defineProps({
     id: Number
 })
 const emit = defineEmits(['delete'])
+const store = settingsStore()
 
 const counter = ref(0)
 const counterName = ref('Counter name')
@@ -38,6 +40,10 @@ const rotate = () => {
         rotation.value = 0
     }
 }
+
+onMounted(() => {
+    counter.value = store.values
+})
 
 </script>
 
