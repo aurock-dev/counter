@@ -7,8 +7,8 @@ const props = defineProps({
     id: Number
 })
 const emit = defineEmits(['delete'])
-const store = settingsStore()
 
+const store = settingsStore()
 const counter = ref(0)
 const counterName = ref('Counter name')
 const isEditing = ref(false)
@@ -42,7 +42,7 @@ const rotate = () => {
 }
 
 onMounted(() => {
-    counter.value = store.values
+    counter.value = store.counterValue
 })
 
 </script>

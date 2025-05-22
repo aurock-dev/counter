@@ -1,10 +1,9 @@
 <script setup>
 import { ref, onMounted } from 'vue'
-import Counter from '../components/Counter.vue';
 import { settingsStore } from '@/store/settings';
+import Counter from '@/components/Counter.vue';
 
 const store = settingsStore()
-
 const counters = ref([])
 
 const addCounter = () => {
@@ -15,8 +14,8 @@ const deleteCounter = (id) => {
     counters.value = counters.value.filter(counterId => counterId !== id)
 }
 
-onMounted(() => {
-    counters.value = Array.from({ length: store.counters }, (_, i) => i + 1)
+onMounted(async () => {
+    counters.value = Array.from({ length: store.counterNumber }, (_, i) => i + 1)
 })
 
 </script>
