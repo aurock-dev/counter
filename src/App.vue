@@ -33,6 +33,24 @@ const logout = async () => {
     console.log('Déconnecté !')
 }
 
+const getDb = async () => {
+    let { data, error } = await supabase
+        .from('test')
+        .select('*')
+
+    console.log(data)
+}
+
+const sendDb = async () => {
+    const { data, error } = await supabase
+        .from('test_auth')
+        .insert([
+            {
+                desc: 'test envoi',
+            }
+        ])
+}
+
 const getImage = async () => {
     const { data: test_bucket, error_3 } = await supabase
         .storage
@@ -82,6 +100,8 @@ onMounted(async () => {
         <img :src="signedUrl" alt="Image protégée" />
         <button @click="logout">logout</button>
         <button @click="getImage">getImage</button>
+        <button @click="getDb">getDb</button>
+        <button @click="sendDb">sendDb</button>
         <input type="file" @change="uploadImage" />
     </span>
     <Header />
