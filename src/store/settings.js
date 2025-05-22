@@ -2,11 +2,14 @@ import { defineStore } from "pinia";
 import { ref } from 'vue'
 
 export const settingsStore = defineStore('settings', () => {
-    const counters = ref(2)
-    const values = ref(20)
+    const counterNumber = ref(2)
+    const counterValue = ref(20)
 
     return {
-        counters,
-        values
+        counterNumber,
+        counterValue,
     }
+},
+{
+    persist: true
 })
