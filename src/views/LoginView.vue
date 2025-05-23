@@ -6,37 +6,63 @@ import { useAuthStore } from '@/store/auth'
 
 const router = useRouter()
 const auth = useAuthStore()
-const email = ref('jeremy24200@gmail.com')
-const password = ref('passwordtest')
+const email = ref('')
+const password = ref('')
 
 const login = async () => {
-    const { data, error: authError } = await supabase.auth.signInWithPassword({
+    const { data, error } = await supabase.auth.signInWithPassword({
         email: email.value,
         password: password.value
     })
 
-    if (authError) {
-        error.value = authError.message
-    } else {
+    if (data.user != null) {
         console.log('Connecté !', data)
         auth.login()
         router.push('/')
+    } else {
+        console.log('Connexion refusée !', data)
     }
 }
 </script>
 
 <template>
-    <div class="app">
-        <button @click="login">login</button>
+    <div class="login">
+        <div class="login__credentials">
+            <label for="email">
+                Mail :
+                <input type="email" name="email" id="email" v-model="email">
+            </label>
+            <label for="password">
+                Password :
+                <input type="password" name="password" id="password" v-model="password">
+            </label>
+        </div>
+        <div class="login__buttons">
+            <button @click="login">Login</button>
+        </div>
     </div>
 </template>
 
 <style scoped>
-.app {
+.login {
     display: flex;
+    flex-direction: column;
+    gap: 30px;
     width: 100%;
     height: 100dvh;
     align-items: center;
     justify-content: center;
+
+    .login__credentials {
+        display: flex;
+        flex-direction: column;
+        align-items: flex-end;
+        gap: 10px;
+    }
+
+    .login__buttons {
+        display: flex;
+        gap: 10px;
+    }
 }
 </style>
