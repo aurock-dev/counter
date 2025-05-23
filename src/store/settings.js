@@ -10,6 +10,7 @@ export const settingsStore = defineStore('settings', () => {
         counterValue,
     }
 },
-{
-    persist: true
-})
+    {
+        persist: true
+    }
+)

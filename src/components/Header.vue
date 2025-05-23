@@ -1,6 +1,17 @@
 <script setup>
-import { RouterLink } from 'vue-router'
+import { RouterLink, useRouter } from 'vue-router'
+import { supabase } from '@/supabase'
+import { useAuthStore } from '@/store/auth'
 
+const router = useRouter()
+const auth = useAuthStore()
+
+const logout = async () => {
+    await supabase.auth.signOut()
+    console.log('Déconnecté !')
+    auth.logout()
+    router.push('/login')
+}
 </script>
 
 <template>
@@ -8,7 +19,10 @@ import { RouterLink } from 'vue-router'
         <div class="header__links">
             <RouterLink class="header__link" to="/">Counters</RouterLink>
             <RouterLink class="header__link" to="/settings">Settings</RouterLink>
+            <RouterLink class="header__link" to="/supabase">Supabase</RouterLink>
+            <RouterLink class="header__link" to="/chart">Chart</RouterLink>
         </div>
+        <button class="header__button" @click="logout">Logout</button>
     </div>
 </template>
 
@@ -35,6 +49,21 @@ import { RouterLink } from 'vue-router'
             color: #fff;
             font-weight: bold;
         }
+    }
+
+    .header__button {
+        background: none;
+        border: none;
+        color: #d8d8d8;
+        cursor: pointer;
+        font-family: inherit;
+        font-size: inherit;
+        text-decoration: none;
+        padding: 0;
+    }
+
+    .header__button:hover {
+        color: #fff;
     }
 }
 </style>
