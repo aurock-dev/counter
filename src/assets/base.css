@@ -12,7 +12,7 @@ button {
     height: max-content;
     border: none;
     border-radius: 5px;
-    background-color: var(--accent-color);
+    background-color: var(--dark-grey);
     color: var(--light);
     box-shadow: var(--default-shadow);
 }

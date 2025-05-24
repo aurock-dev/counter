@@ -1,6 +1,6 @@
 <script setup>
 import { ref, onMounted } from 'vue'
-import { RotateCwSquare, Trash2, EllipsisVertical, Check } from 'lucide-vue-next'
+import { RotateCwSquare, Trash2, EllipsisVertical, Check, Minus, Plus } from 'lucide-vue-next'
 import { settingsStore } from '@/store/settings'
 
 const props = defineProps({
@@ -77,9 +77,13 @@ onMounted(() => {
             </template>
         </div>
         <div class="counter__buttons">
-            <button class="counter__button" @click="decrement">-</button>
+            <button class="counter__button" @click="decrement">
+                <Minus />
+            </button>
             <p class="counter__value">{{ counter }}</p>
-            <button class="counter__button" @click="increment">+</button>
+            <button class="counter__button" @click="increment">
+                <Plus />
+            </button>
         </div>
     </div>
 </template>
@@ -95,9 +99,7 @@ onMounted(() => {
     padding: 10px;
     align-items: center;
     border-radius: 5px;
-    background-color: #dbdbdb;
-
-
+    background-color: var(--grey);
 
     .counter__header {
         display: flex;
@@ -146,7 +148,8 @@ onMounted(() => {
         width: 100%;
 
         .counter__button {
-            min-width: 3em;
+            width: 3em;
+            height: 3em;
         }
 
         .counter__value {

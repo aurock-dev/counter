@@ -19,20 +19,20 @@ import { RouterLink } from 'vue-router'
     flex-direction: row;
     justify-content: space-between;
     padding: 2px 5px;
-    background-color: #022252;
-    color: #fff;
+    background-color: var(--dark-grey);
+    color: var(--light);
 
     .header__links {
         display: flex;
         gap: 20px;
 
         .header__link {
-            color: #d8d8d8;
+            color: var(--light-grey);
             text-decoration: none;
         }
 
         .header__link.router-link-active {
-            color: #fff;
+            color: var(--light);
             font-weight: bold;
         }
     }
