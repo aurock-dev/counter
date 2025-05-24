@@ -1,6 +1,6 @@
 <script setup>
 import { ref, onMounted } from 'vue'
-import { RotateCwSquare, Trash2 } from 'lucide-vue-next'
+import { RotateCwSquare, Trash2, EllipsisVertical } from 'lucide-vue-next'
 import { settingsStore } from '@/store/settings'
 
 const props = defineProps({
@@ -13,6 +13,7 @@ const counter = ref(0)
 const counterName = ref('Counter name')
 const isEditing = ref(false)
 const rotation = ref(0)
+const optionsState = ref(false)
 
 const increment = () => {
     counter.value++
@@ -41,6 +42,10 @@ const rotate = () => {
     }
 }
 
+const toggleOptions = () => {
+    optionsState.value = !optionsState.value
+}
+
 onMounted(() => {
     counter.value = store.counterValue
 })
@@ -49,17 +54,24 @@ onMounted(() => {
 
 <template>
     <div class="counter" :style="{ transform: `rotate(${rotation}deg)` }">
-        <div class="counter__delete" @click="handleDelete">
-            <Trash2 color="red" />
-        </div>
-        <div class="counter__rotate" @click="rotate">
-            <RotateCwSquare />
-        </div>
         <div class="counter__header">
-            <div class="counter__name" @click="startEditing" v-if="!isEditing">
-                <p class="counter__name--p">{{ counterName }}</p>
+            <div v-if="!isEditing" class="counter__option" @click="toggleOptions">
+                <EllipsisVertical />
             </div>
-            <input v-else v-model="counterName" @blur="stopEditing" @keyup.enter="stopEditing" type="text" />
+            <div v-if="optionsState" class="counter__options">
+                <div @click="rotate">
+                    <RotateCwSquare />
+                </div>
+                <div @click="handleDelete">
+                    <Trash2 color="red" />
+                </div>
+            </div>
+            <template v-if="!optionsState">
+                <div v-if="!isEditing" class="counter__name" @click="startEditing">
+                    <p class="counter__name--p">{{ counterName }}</p>
+                </div>
+                <input v-else v-model="counterName" @blur="stopEditing" @keyup.enter="stopEditing" type="text" />
+            </template>
         </div>
         <div class="counter__buttons">
             <button class="counter__button" @click="decrement">-</button>
@@ -82,33 +94,31 @@ onMounted(() => {
     border-radius: 5px;
     background-color: #dbdbdb;
 
-    .counter__delete {
-        position: absolute;
-        top: 0;
-        left: 0;
-        display: flex;
-        padding: 4px;
-        cursor: pointer;
-    }
 
-    .counter__rotate {
-        position: absolute;
-        top: 0;
-        right: 0;
-        display: flex;
-        padding: 4px;
-        cursor: pointer;
-    }
 
     .counter__header {
         display: flex;
         gap: 10px;
         align-items: center;
         justify-content: center;
-        width: 70%;
-        padding: 0 10px;
+        width: 100%;
+
+        .counter__option {
+            display: flex;
+        }
+
+        .counter__options {
+            display: flex;
+            gap: 10px;
+            width: 100%;
+        }
+
+        .counter__options>div {
+            display: flex;
+        }
 
         .counter__name {
+            width: 100%;
             text-align: center;
             white-space: nowrap;
             overflow: hidden;
