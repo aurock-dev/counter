@@ -2,7 +2,7 @@ body {
     font-family: var(--font);
 }
 
-button{
+button {
     display: inline-flex;
     padding: 6px 8px;
     justify-content: center;
@@ -17,15 +17,16 @@ button{
     box-shadow: var(--default-shadow);
 }
 
-button:hover{
+button:hover {
     cursor: pointer;
 }
 
-input{
+input {
     border: 1px solid var(--info);
     border-radius: 5px;
+    width: 100%;
 }
-  
-input:focus{
+
+input:focus {
     outline: var(--info) solid 1px;
 }

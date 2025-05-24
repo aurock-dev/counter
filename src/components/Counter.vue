@@ -1,6 +1,6 @@
 <script setup>
 import { ref, onMounted } from 'vue'
-import { RotateCwSquare, Trash2, EllipsisVertical } from 'lucide-vue-next'
+import { RotateCwSquare, Trash2, EllipsisVertical, Check } from 'lucide-vue-next'
 import { settingsStore } from '@/store/settings'
 
 const props = defineProps({
@@ -70,7 +70,10 @@ onMounted(() => {
                 <div v-if="!isEditing" class="counter__name" @click="startEditing">
                     <p class="counter__name--p">{{ counterName }}</p>
                 </div>
-                <input v-else v-model="counterName" @blur="stopEditing" @keyup.enter="stopEditing" type="text" />
+                <div v-if="isEditing" class="counter__input">
+                    <input v-model="counterName" type="text" @keyup.enter="stopEditing" />
+                    <Check @click="stopEditing" />
+                </div>
             </template>
         </div>
         <div class="counter__buttons">
@@ -127,6 +130,11 @@ onMounted(() => {
             .counter__name--p {
                 text-overflow: ellipsis;
             }
+        }
+
+        .counter__input {
+            display: flex;
+            gap: 5px;
         }
     }
 
