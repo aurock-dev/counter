@@ -21,7 +21,7 @@ const toggleRow = () => {
                 Counters
                 <span v-if="store.counters > 0">({{ store.counters }})</span>
             </RouterLink>
-            <RouterLink class="header__link" to="/settings">Settings</RouterLink>
+            <!-- <RouterLink class="header__link" to="/settings">Settings</RouterLink> -->
         </div>
         <div>
             <button v-if="store.columnCount == 1" class="--btn-icon" @click="toggleColumn">
