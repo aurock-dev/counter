@@ -145,7 +145,8 @@ onMounted(() => {
 
         .counter__input {
             display: flex;
-            gap: 5px;
+            gap: 10px;
+            width: 100%;
         }
     }
 
