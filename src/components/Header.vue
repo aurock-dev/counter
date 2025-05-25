@@ -37,6 +37,7 @@ const toggleRow = () => {
 <style scoped>
 .header {
     width: 100%;
+    height: var(--header-height);
     display: flex;
     flex-direction: row;
     justify-content: space-between;

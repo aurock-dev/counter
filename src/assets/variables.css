@@ -9,4 +9,6 @@
     --default-shadow: 0px 0px 4px 0px var(--shadow-color);
 
     --font: Verdana, Arial, Helvetica, sans-serif;
+
+    --header-height: 44px;
 }
