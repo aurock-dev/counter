@@ -94,7 +94,7 @@ onMounted(() => {
     display: flex;
     flex-direction: column;
     gap: 10px;
-    max-width: 250px;
+    /* max-width: 250px; */
     width: 100%;
     padding: 10px;
     align-items: center;

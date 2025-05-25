@@ -21,6 +21,13 @@ button:hover {
     cursor: pointer;
 }
 
+button.--btn-icon {
+    border: none;
+    border-radius: 0;
+    background: none;
+    box-shadow: none;
+}
+
 input {
     border: 1px solid var(--info);
     border-radius: 5px;
