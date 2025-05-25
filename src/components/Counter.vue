@@ -1,6 +1,6 @@
 <script setup>
 import { ref, onMounted } from 'vue'
-import { RotateCwSquare, Trash2, EllipsisVertical, Check, Minus, Plus } from 'lucide-vue-next'
+import { RotateCwSquare, Trash2, EllipsisVertical, Check, Minus, Plus, RotateCw } from 'lucide-vue-next'
 import { settingsStore } from '@/store/settings'
 
 const props = defineProps({
@@ -56,16 +56,17 @@ onMounted(() => {
 <template>
     <div class="counter" :style="{ transform: `rotate(${rotation}deg)` }">
         <div class="counter__header">
-            <div v-if="!isEditing" class="counter__option" @click="toggleOptions">
+            <div v-if="!isEditing" class="counter__option" :class="{ 'counter__option--open': optionsState }"
+                @click="toggleOptions">
                 <EllipsisVertical />
             </div>
             <div v-if="optionsState" class="counter__options">
-                <div @click="rotate">
-                    <RotateCwSquare />
-                </div>
-                <div @click="handleDelete">
+                <button class="--btn-icon" @click="rotate">
+                    <RotateCw />
+                </button>
+                <button class="--btn-icon" @click="handleDelete">
                     <Trash2 color="red" />
-                </div>
+                </button>
             </div>
             <template v-if="!optionsState">
                 <div v-if="!isEditing" class="counter__name" @click="startEditing">
@@ -108,9 +109,15 @@ onMounted(() => {
         align-items: center;
         justify-content: center;
         width: 100%;
+        height: 40px;
 
         .counter__option {
             display: flex;
+            transition: transform 0.15s ease;
+        }
+
+        .counter__option--open {
+            transform: rotate(90deg);
         }
 
         .counter__options {
