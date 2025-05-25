@@ -31,7 +31,7 @@ button.--btn-icon {
 button.--outline {
     box-shadow: none;
     background: none;
-    border: solid 2px var(--outline-grey);
+    border: solid 2px var(--middle-grey);
 }
 
 input {

@@ -96,12 +96,11 @@ onMounted(() => {
     display: flex;
     flex-direction: column;
     gap: 10px;
-    /* max-width: 250px; */
     width: 100%;
-    padding: 10px;
     align-items: center;
-    border-radius: 5px;
+    border-radius: 10px;
     background-color: var(--grey);
+    overflow: hidden;
 
     .counter__header {
         display: flex;
@@ -110,6 +109,8 @@ onMounted(() => {
         justify-content: center;
         width: 100%;
         height: 40px;
+        background-color: var(--middle-grey);
+        padding: 10px;
 
         .counter__option {
             display: flex;
@@ -154,6 +155,7 @@ onMounted(() => {
         align-items: center;
         justify-content: space-between;
         width: 100%;
+        padding: 10px;
 
         .counter__button {
             width: 3em;
