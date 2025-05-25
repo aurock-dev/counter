@@ -40,6 +40,7 @@ const rotate = () => {
     if (rotation.value > 180) {
         rotation.value = 0
     }
+    optionsState.value = false
 }
 
 const toggleOptions = () => {
