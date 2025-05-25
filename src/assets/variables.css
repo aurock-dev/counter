@@ -3,6 +3,7 @@
     --grey: #dbdbdb;
     --light-grey: #d8d8d8;
     --dark-grey: #b0b0b0;
+    --outline-grey: #c4c4c4;
 
     --shadow-color: rgba(53, 53, 53, 0.59);
     --default-shadow: 0px 0px 4px 0px var(--shadow-color);

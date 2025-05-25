@@ -61,11 +61,11 @@ onMounted(() => {
                 <EllipsisVertical />
             </div>
             <div v-if="optionsState" class="counter__options">
-                <button class="--btn-icon" @click="rotate">
-                    <RotateCw />
+                <button class="--outline" @click="rotate">
+                    <RotateCw color="black" />
                 </button>
-                <button class="--btn-icon" @click="handleDelete">
-                    <Trash2 color="red" />
+                <button class="--outline" @click="handleDelete">
+                    <Trash2 color="black" />
                 </button>
             </div>
             <template v-if="!optionsState">

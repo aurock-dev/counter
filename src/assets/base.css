@@ -4,14 +4,14 @@ body {
 
 button {
     display: inline-flex;
-    padding: 6px 8px;
+    padding: 6px;
     justify-content: center;
     align-items: center;
     gap: 10px;
     width: max-content;
     height: max-content;
     border: none;
-    border-radius: 5px;
+    border-radius: 10px;
     background-color: var(--dark-grey);
     color: var(--light);
     box-shadow: var(--default-shadow);
@@ -26,6 +26,12 @@ button.--btn-icon {
     border-radius: 0;
     background: none;
     box-shadow: none;
+}
+
+button.--outline {
+    box-shadow: none;
+    background: none;
+    border: solid 2px var(--outline-grey);
 }
 
 input {
