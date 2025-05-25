@@ -1,3 +1,10 @@
+html,
+body,
+#app {
+    height: 100%;
+    margin: 0;
+}
+
 body {
     font-family: var(--font);
 }
@@ -36,7 +43,7 @@ button.--outline {
 
 input {
     border: 1px solid var(--info);
-    border-radius: 5px;
+    border-radius: 10px;
     width: 100%;
 }
 

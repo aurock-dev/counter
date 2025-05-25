@@ -97,6 +97,8 @@ onMounted(() => {
     flex-direction: column;
     gap: 10px;
     width: 100%;
+    height: 100%;
+    min-height: 120px;
     align-items: center;
     border-radius: 10px;
     background-color: var(--grey);
@@ -156,6 +158,7 @@ onMounted(() => {
         align-items: center;
         justify-content: space-between;
         width: 100%;
+        height: 100%;
         padding: 10px;
 
         .counter__button {
