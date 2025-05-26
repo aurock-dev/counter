@@ -5,8 +5,8 @@ import { supabase } from '@/supabase'
 const test = ref([])
 const test_auth = ref([])
 const errorMsg = ref(null)
-const email = ref('jeremy24200@gmail.com')
-const password = ref('passwordtest')
+const email = ref('')
+const password = ref('')
 const signedUrl = ref(null)
 const uploadUrl = ref(null)
 const user = ref(null)
@@ -44,31 +44,31 @@ const getImage = async () => {
     }
 }
 
-const uploadImage = async () => {
-    const file = event.target.files[0]
-    if (!file) return
-    const filePath = `uploads/${Date.now()}-${file.name}`
+const uploadImage = async (event) => {
+    const file = event.target.files[0];
+    if (!file) return;
 
-    const { dataUser } = await supabase.auth.getUser()
-    user.value = dataUser.user
-    if (!user.data.user) {
-        console.log("Non connecté, upload impossible.")
-        return
+    const filePath = `uploads/${Date.now()}-${file.name}`;
+
+    const { data, error } = await supabase.auth.getUser();
+    console.log(data);
+    user.value = data?.user;
+
+    if (!data?.user) {
+        console.log("Non connecté, upload impossible.");
+        return;
     }
 
-    const { data, error } = await supabase.storage
+    const { data: uploadData, error: uploadError } = await supabase.storage
         .from('test')
-        .upload(filePath, file)
+        .upload(filePath, file);
+
+    if (uploadError) {
+        console.error("Erreur upload:", uploadError);
+    } else {
+        console.log("Upload réussi:", uploadData);
+    }
 }
-
-// onMounted(async () => {
-//     const { data } = await supabase.auth.getUser()
-//     user.value = data.user
-
-//     supabase.auth.onAuthStateChange((_event, session) => {
-//         user.value = session?.user ?? null
-//     })
-// })
 </script>
 
 <template>
