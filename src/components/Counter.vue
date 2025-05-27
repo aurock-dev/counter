@@ -1,12 +1,11 @@
 <script setup>
 import { ref, onMounted } from 'vue'
-import { RotateCwSquare, Trash2, EllipsisVertical, Check, Minus, Plus, RotateCw } from 'lucide-vue-next'
+import { Trash2, EllipsisVertical, Check, Minus, Plus, RotateCw } from 'lucide-vue-next'
 import { settingsStore } from '@/store/settings'
 
 const props = defineProps({
     id: Number
 })
-const emit = defineEmits(['delete'])
 
 const store = settingsStore()
 const counter = ref(0)
@@ -31,8 +30,8 @@ const stopEditing = () => {
     isEditing.value = false
 }
 
-const handleDelete = () => {
-    emit('delete', props.id)
+const deleteCounter = () => {
+    store.counters = store.counters.filter(counterId => counterId !== props.id)
 }
 
 const rotate = () => {
@@ -64,7 +63,7 @@ onMounted(() => {
                 <button class="--outline" @click="rotate">
                     <RotateCw color="black" />
                 </button>
-                <button class="--outline" @click="handleDelete">
+                <button class="--outline" @click="deleteCounter">
                     <Trash2 color="black" />
                 </button>
             </div>
