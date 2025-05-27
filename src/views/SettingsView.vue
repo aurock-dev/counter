@@ -9,7 +9,7 @@ const store = settingsStore()
     <div class="app">
         <label for="counters">
             Counter:
-            <input type="number" name="counters" id="input-counter" v-model="store.counterNumber">
+            <input type="number" name="counters" id="input-counter" v-model="store.counters">
         </label>
         <label for="values">
             Values:
