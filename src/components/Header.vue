@@ -1,7 +1,7 @@
 <script setup>
 import { RouterLink } from 'vue-router'
 import { settingsStore } from '@/store/settings';
-import { Columns, Rows, Plus } from 'lucide-vue-next';
+import { Columns, Rows, Plus, Hash } from 'lucide-vue-next';
 
 const store = settingsStore()
 
@@ -23,11 +23,9 @@ const toggleRow = () => {
         <button class="--btn-icon" @click="addCounter">
             <Plus />
         </button>
-        <div class="header__links">
-            <div>
-                Counters
-                <span v-if="store.counters.length > 0">({{ store.counters.length }})</span>
-            </div>
+        <div class="header__title">
+            <Hash />
+            <span v-if="store.counters.length > 0">({{ store.counters.length }})</span>
             <!-- <RouterLink class="header__link" to="/">
                 Counters
                 <span v-if="store.counters.length > 0">({{ store.counters.length }})</span>
@@ -56,6 +54,12 @@ const toggleRow = () => {
     padding: 2px 5px;
     background-color: var(--dark-grey);
     color: var(--light);
+
+    .header__title {
+        display: flex;
+        align-items: center;
+        height: 100%;
+    }
 
     .header__links {
         display: flex;
