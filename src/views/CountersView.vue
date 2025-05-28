@@ -2,6 +2,7 @@
 import { ref, onMounted } from 'vue'
 import { settingsStore } from '@/store/settings';
 import Counter from '@/components/Counter.vue';
+import { supabase } from '@/supabase'
 
 const store = settingsStore()
 const counters = ref([])
@@ -16,6 +17,11 @@ const deleteCounter = (id) => {
 
 onMounted(async () => {
     counters.value = Array.from({ length: store.counterNumber }, (_, i) => i + 1)
+
+    const { data, error } = await supabase.functions.invoke('hello-world', {
+        body: { name: 'Test VueJS' },
+    })
+    console.log(data)
 })
 
 </script>

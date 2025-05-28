@@ -1,5 +1,5 @@
 <script setup>
-import { ref } from 'vue'
+import { ref, onBeforeUnmount } from 'vue'
 import { supabase } from '@/supabase'
 
 const test = ref([])
@@ -10,16 +10,30 @@ const password = ref('')
 const signedUrl = ref(null)
 const uploadUrl = ref(null)
 const user = ref(null)
+const intervalId = ref(null)
+
+const startSending = () => {
+    if (!intervalId.value) {
+        intervalId.value = setInterval(sendDb, 1000)
+    }
+}
+
+const stopSending = () => {
+    clearInterval(intervalId.value)
+    intervalId.value = null
+    console.log('staup')
+}
 
 const getDb = async () => {
     let { data, error } = await supabase
-        .from('test')
+        .from('test_auth')
         .select('*')
 
     console.log(data)
 }
 
 const sendDb = async () => {
+    console.log('sapar')
     const { data, error } = await supabase
         .from('test_auth')
         .insert([
@@ -69,6 +83,10 @@ const uploadImage = async (event) => {
         console.log("Upload réussi:", uploadData);
     }
 }
+
+onBeforeUnmount(() => {
+    stopSending()
+})
 </script>
 
 <template>
@@ -77,6 +95,8 @@ const uploadImage = async (event) => {
         <button @click="getImage">getImage</button>
         <button @click="getDb">getDb</button>
         <button @click="sendDb">sendDb</button>
+        <button @click="startSending">Start loop</button>
+        <button @click="stopSending" v-if="intervalId">Stop loop</button>
         <input type="file" @change="uploadImage" />
     </div>
 </template>
