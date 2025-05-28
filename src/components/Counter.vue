@@ -1,6 +1,6 @@
 <script setup>
 import { ref, onMounted } from 'vue'
-import { Trash2, EllipsisVertical, Check, Minus, Plus, RotateCw } from 'lucide-vue-next'
+import { Trash2, EllipsisVertical, Check, Minus, Plus, RotateCw, Circle } from 'lucide-vue-next'
 import { settingsStore } from '@/store/settings'
 
 const props = defineProps({
@@ -13,6 +13,14 @@ const counterName = ref('Counter name')
 const isEditing = ref(false)
 const rotation = ref(0)
 const optionsState = ref(false)
+const colorList = [
+    'var(--clr-green-500)',
+    'var(--clr-blue-500)',
+    'var(--clr-red-500)',
+    'var(--clr-yellow-500)',
+    'var(--clr-purple-500)',
+    'var(--clr-orange-500)'
+]
 
 const increment = () => {
     counter.value++
@@ -46,6 +54,10 @@ const toggleOptions = () => {
     optionsState.value = !optionsState.value
 }
 
+const changeColor = () => {
+
+}
+
 onMounted(() => {
     counter.value = store.counterValue
 })
@@ -66,6 +78,11 @@ onMounted(() => {
                 <button class="--outline" @click="deleteCounter">
                     <Trash2 color="black" />
                 </button>
+                <div v-for="color in colorList">
+                    <button class="--outline" @click="changeColor">
+                        <Circle :color="color" />
+                    </button>
+                </div>
             </div>
             <template v-if="!optionsState">
                 <div v-if="!isEditing" class="counter__name" @click="startEditing">
@@ -100,7 +117,7 @@ onMounted(() => {
     min-height: 120px;
     align-items: center;
     border-radius: 10px;
-    background-color: var(--grey);
+    background-color: var(--clr-grey-500);
     overflow: hidden;
 
     .counter__header {
@@ -110,7 +127,7 @@ onMounted(() => {
         justify-content: center;
         width: 100%;
         height: 40px;
-        background-color: var(--middle-grey);
+        background-color: var(--clr-grey-600);
         padding: 10px;
 
         .counter__option {
