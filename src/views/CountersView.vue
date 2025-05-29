@@ -1,18 +1,20 @@
 <script setup>
-import { onMounted, computed } from 'vue'
-import { settingsStore } from '@/store/settings';
+import { computed } from 'vue'
+import { useSettingsStore } from '@/store/settings';
+import { useCountersStore } from '@/store/counters';
 import Counter from '@/components/Counter.vue';
 
-const store = settingsStore()
+const settings = useSettingsStore()
+const counters = useCountersStore()
 
 const layoutClass = computed(() => {
-    return store.columnCount === 2 ? 'two-col' : 'one-col'
+    return settings.columnCount === 2 ? 'two-col' : 'one-col'
 })
 </script>
 
 <template>
     <div :class="['app', layoutClass]">
-        <Counter v-for="counter in store.counters" :key="counter.id" :id="counter.id" />
+        <Counter v-for="counter in counters.counters" :key="counter.id" :id="counter.id" />
     </div>
 </template>
 

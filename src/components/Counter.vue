@@ -1,13 +1,13 @@
 <script setup>
 import { ref, computed } from 'vue'
 import { Trash2, EllipsisVertical, Check, Minus, Plus, RotateCw, Circle } from 'lucide-vue-next'
-import { settingsStore } from '@/store/settings'
+import { useCountersStore } from '@/store/counters'
 
 const props = defineProps({
     id: Number
 })
 
-const store = settingsStore()
+const counters = useCountersStore()
 const isEditing = ref(false)
 const optionsState = ref(false)
 
@@ -24,22 +24,22 @@ const counter = computed(() => currentCounter.value.value)
 const counterName = computed({
     get: () => currentCounter.value?.name ?? 'Unnamed',
     set: (val) => {
-        store.updateCounter(props.id, { name: val })
+        counters.updateCounter(props.id, { name: val })
     }
 })
 const currentColor = computed(() => currentCounter.value.color)
 const rotated = computed(() => currentCounter.value.rotated)
 
 const currentCounter = computed(() => {
-    return store.counters.find(c => c.id === props.id) || { value: 0, name: '', color: colorList[0], rotated: false }
+    return counters.counters.find(c => c.id === props.id) || { value: 0, name: '', color: colorList[0], rotated: false }
 })
 
 const increment = () => {
-    store.updateCounter(props.id, { value: counter.value + 1 })
+    counters.updateCounter(props.id, { value: counter.value + 1 })
 }
 
 const decrement = () => {
-    store.updateCounter(props.id, { value: counter.value - 1 })
+    counters.updateCounter(props.id, { value: counter.value - 1 })
 }
 
 const startEditing = () => {
@@ -47,16 +47,16 @@ const startEditing = () => {
 }
 
 const stopEditing = () => {
-    store.updateCounter(props.id, { name: counterName.value })
+    counters.updateCounter(props.id, { name: counterName.value })
     isEditing.value = false
 }
 
 const deleteCounter = () => {
-    store.deleteCounter(props.id)
+    counters.deleteCounter(props.id)
 }
 
 const rotate = () => {
-    store.updateCounter(props.id, { rotated: !currentCounter.value.rotated })
+    counters.updateCounter(props.id, { rotated: !currentCounter.value.rotated })
     optionsState.value = false
 }
 
@@ -65,7 +65,7 @@ const toggleOptions = () => {
 }
 
 const changeColor = (color) => {
-    store.updateCounter(props.id, { color })
+    counters.updateCounter(props.id, { color })
     optionsState.value = false
 }
 

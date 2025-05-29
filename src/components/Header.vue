@@ -1,29 +1,30 @@
 <script setup>
-import { RouterLink } from 'vue-router'
-import { settingsStore } from '@/store/settings';
+import { useSettingsStore } from '@/store/settings';
+import { useCountersStore } from '@/store/counters';
 import { Columns, Rows, Plus, Hash } from 'lucide-vue-next';
 
-const store = settingsStore()
+const settings = useSettingsStore()
+const counters = useCountersStore()
 
 const addCounter = () => {
-    const newId = store.counters.length
-        ? Math.max(...store.counters.map(c => c.id)) + 1
-        : 1
+    const newId = counters.counters.length
+        ? Math.max(...counters.counters.map(c => c.id)) + 1
+        : 1;
 
-    store.counters.push({
+    counters.addCounter({
         id: newId,
         value: 0,
         name: `Counter ${newId}`,
         color: 'var(--clr-grey-500)',
         rotated: false,
-    })
+    });
 }
 
 const toggleColumn = () => {
-    store.columnCount = 2
+    settings.columnCount = 2
 }
 const toggleRow = () => {
-    store.columnCount = 1
+    settings.columnCount = 1
 }
 
 </script>
@@ -35,18 +36,13 @@ const toggleRow = () => {
         </button>
         <div class="header__title">
             <Hash />
-            <span v-if="store.counters.length > 0">({{ store.counters.length }})</span>
-            <!-- <RouterLink class="header__link" to="/">
-                Counters
-                <span v-if="store.counters.length > 0">({{ store.counters.length }})</span>
-            </RouterLink> -->
-            <!-- <RouterLink class="header__link" to="/settings">Settings</RouterLink> -->
+            <span v-if="counters.counters.length > 0">({{ counters.counters.length }})</span>
         </div>
         <div>
-            <button v-if="store.columnCount == 1" class="--btn-icon" @click="toggleColumn">
+            <button v-if="settings.columnCount == 1" class="--btn-icon" @click="toggleColumn">
                 <Columns />
             </button>
-            <button v-if="store.columnCount == 2" class="--btn-icon" @click="toggleRow">
+            <button v-if="settings.columnCount == 2" class="--btn-icon" @click="toggleRow">
                 <Rows />
             </button>
         </div>
