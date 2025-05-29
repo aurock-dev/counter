@@ -1,5 +1,5 @@
 import { defineStore } from 'pinia';
-import { ref } from 'vue';
+import { ref, computed } from 'vue';
 
 export const useCountersStore = defineStore('counters', () => {
     const counters = ref([]);
@@ -32,11 +32,26 @@ export const useCountersStore = defineStore('counters', () => {
         counters.value = counters.value.filter(c => c.id !== id);
     }
 
+    const winnerGradient = computed(() => {
+        if (!counters.value.length) return 'var(--clr-grey-500)';
+
+        const max = Math.max(...counters.value.map(c => c.value));
+        const winners = counters.value.filter(c => c.value === max);
+
+        if (winners.length === 1) {
+            return winners[0].color;
+        }
+
+        const gradientColors = winners.map(w => w.color).join(', ');
+        return `linear-gradient(90deg, ${gradientColors})`;
+    });
+
     return {
         counters,
         createCounter,
         updateCounter,
-        deleteCounter
+        deleteCounter,
+        winnerGradient
     };
 }, {
     persist: true
