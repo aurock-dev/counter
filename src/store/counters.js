@@ -4,8 +4,18 @@ import { ref } from 'vue';
 export const useCountersStore = defineStore('counters', () => {
     const counters = ref([]);
 
-    function addCounter(counter) {
-        counters.value.push(counter);
+    function createCounter() {
+        const newId = counters.value.length
+            ? Math.max(...counters.value.map(c => c.id)) + 1
+            : 1;
+
+        counters.value.push({
+            id: newId,
+            value: 0,
+            name: `Counter ${newId}`,
+            color: 'var(--clr-grey-500)',
+            rotated: false,
+        });
     }
 
     function updateCounter(id, data) {
@@ -24,7 +34,7 @@ export const useCountersStore = defineStore('counters', () => {
 
     return {
         counters,
-        addCounter,
+        createCounter,
         updateCounter,
         deleteCounter
     };

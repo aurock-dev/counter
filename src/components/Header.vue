@@ -5,33 +5,11 @@ import { Columns, Rows, Plus, Hash } from 'lucide-vue-next';
 
 const settings = useSettingsStore()
 const counters = useCountersStore()
-
-const addCounter = () => {
-    const newId = counters.counters.length
-        ? Math.max(...counters.counters.map(c => c.id)) + 1
-        : 1;
-
-    counters.addCounter({
-        id: newId,
-        value: 0,
-        name: `Counter ${newId}`,
-        color: 'var(--clr-grey-500)',
-        rotated: false,
-    });
-}
-
-const toggleColumn = () => {
-    settings.columnCount = 2
-}
-const toggleRow = () => {
-    settings.columnCount = 1
-}
-
 </script>
 
 <template>
     <div class="header">
-        <button class="--btn-icon" @click="addCounter">
+        <button class="--btn-icon" @click="counters.createCounter()">
             <Plus />
         </button>
         <div class="header__title">
@@ -39,10 +17,10 @@ const toggleRow = () => {
             <span v-if="counters.counters.length > 0">({{ counters.counters.length }})</span>
         </div>
         <div>
-            <button v-if="settings.columnCount == 1" class="--btn-icon" @click="toggleColumn">
+            <button v-if="settings.columnCount == 1" class="--btn-icon" @click="settings.setColumns()">
                 <Columns />
             </button>
-            <button v-if="settings.columnCount == 2" class="--btn-icon" @click="toggleRow">
+            <button v-if="settings.columnCount == 2" class="--btn-icon" @click="settings.setRows()">
                 <Rows />
             </button>
         </div>
