@@ -1,25 +1,47 @@
 <script setup>
-import { ref, onMounted } from 'vue'
-import { Trash2, EllipsisVertical, Check, Minus, Plus, RotateCw } from 'lucide-vue-next'
-import { settingsStore } from '@/store/settings'
+import { ref, computed } from 'vue'
+import { Trash2, EllipsisVertical, Check, Minus, Plus, RotateCw, Circle } from 'lucide-vue-next'
+import { useCountersStore } from '@/store/counters'
 
 const props = defineProps({
     id: Number
 })
 
-const store = settingsStore()
-const counter = ref(0)
-const counterName = ref('Counter name')
+const counters = useCountersStore()
 const isEditing = ref(false)
-const rotation = ref(0)
 const optionsState = ref(false)
 
+const colorList = [
+    'var(--clr-red-500)',
+    'var(--clr-blue-500)',
+    'var(--clr-yellow-500)',
+    'var(--clr-purple-500)',
+    'var(--clr-green-500)',
+    'var(--clr-orange-500)',
+]
+
+const counter = computed(() => currentCounter.value.value)
+const counterName = computed({
+    get: () => currentCounter.value?.name ?? 'Unnamed',
+    set: (val) => {
+        counters.updateCounter(props.id, { name: val })
+    }
+})
+const currentColor = computed(() => currentCounter.value.color)
+const currentColorHeader = computed(() => currentCounter.value.color.replace('500', '700'))
+const currentColorButton = computed(() => currentCounter.value.color.replace('500', '600'))
+const rotated = computed(() => currentCounter.value.rotated)
+
+const currentCounter = computed(() => {
+    return counters.counters.find(c => c.id === props.id) || { value: 0, name: '', color: colorList[0], rotated: false }
+})
+
 const increment = () => {
-    counter.value++
+    counters.updateCounter(props.id, { value: counter.value + 1 })
 }
 
 const decrement = () => {
-    counter.value--
+    counters.updateCounter(props.id, { value: counter.value - 1 })
 }
 
 const startEditing = () => {
@@ -27,18 +49,16 @@ const startEditing = () => {
 }
 
 const stopEditing = () => {
+    counters.updateCounter(props.id, { name: counterName.value })
     isEditing.value = false
 }
 
 const deleteCounter = () => {
-    store.counters = store.counters.filter(counterId => counterId !== props.id)
+    counters.deleteCounter(props.id)
 }
 
 const rotate = () => {
-    rotation.value += 180
-    if (rotation.value > 180) {
-        rotation.value = 0
-    }
+    counters.updateCounter(props.id, { rotated: !currentCounter.value.rotated })
     optionsState.value = false
 }
 
@@ -46,15 +66,17 @@ const toggleOptions = () => {
     optionsState.value = !optionsState.value
 }
 
-onMounted(() => {
-    counter.value = store.counterValue
-})
+const changeColor = (color) => {
+    counters.updateCounter(props.id, { color })
+    optionsState.value = false
+}
 
 </script>
 
 <template>
-    <div class="counter" :style="{ transform: `rotate(${rotation}deg)` }">
-        <div class="counter__header">
+    <div class="counter"
+        :style="{ transform: rotated ? 'rotate(180deg)' : 'rotate(0deg)', backgroundColor: currentColor }">
+        <div class="counter__header" :style="{ backgroundColor: currentColorHeader }">
             <div v-if="!isEditing" class="counter__option" :class="{ 'counter__option--open': optionsState }"
                 @click="toggleOptions">
                 <EllipsisVertical />
@@ -66,6 +88,11 @@ onMounted(() => {
                 <button class="--outline" @click="deleteCounter">
                     <Trash2 color="black" />
                 </button>
+                <div v-for="color in colorList">
+                    <button class="--outline" @click="changeColor(color)">
+                        <Circle :color="color.replace('500', '700')" :fill="color" />
+                    </button>
+                </div>
             </div>
             <template v-if="!optionsState">
                 <div v-if="!isEditing" class="counter__name" @click="startEditing">
@@ -78,11 +105,11 @@ onMounted(() => {
             </template>
         </div>
         <div class="counter__buttons">
-            <button class="counter__button" @click="decrement">
+            <button class="counter__button" @click="decrement" :style="{ backgroundColor: currentColorButton }">
                 <Minus />
             </button>
             <p class="counter__value">{{ counter }}</p>
-            <button class="counter__button" @click="increment">
+            <button class="counter__button" @click="increment" :style="{ backgroundColor: currentColorButton }">
                 <Plus />
             </button>
         </div>
@@ -94,13 +121,12 @@ onMounted(() => {
     position: relative;
     display: flex;
     flex-direction: column;
-    gap: 10px;
     width: 100%;
     height: 100%;
     min-height: 120px;
     align-items: center;
     border-radius: 10px;
-    background-color: var(--grey);
+    background-color: var(--clr-grey-500);
     overflow: hidden;
 
     .counter__header {
@@ -110,7 +136,7 @@ onMounted(() => {
         justify-content: center;
         width: 100%;
         height: 40px;
-        background-color: var(--middle-grey);
+        background-color: var(--clr-grey-600);
         padding: 10px;
 
         .counter__option {
@@ -126,6 +152,7 @@ onMounted(() => {
             display: flex;
             gap: 10px;
             width: 100%;
+            overflow: auto;
         }
 
         .counter__options>div {
@@ -153,19 +180,26 @@ onMounted(() => {
 
     .counter__buttons {
         display: flex;
-        gap: 5px;
         align-items: center;
         justify-content: space-between;
         width: 100%;
         height: 100%;
-        padding: 10px;
 
         .counter__button {
-            width: 3em;
-            height: 3em;
+            width: 5em;
+            height: 100%;
+            padding: 0;
+            gap: 0;
+            border-radius: 0;
+            box-shadow: none;
         }
 
         .counter__value {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 100%;
+            height: 100%;
             overflow: hidden;
             text-overflow: ellipsis;
         }

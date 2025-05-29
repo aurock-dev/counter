@@ -1,42 +1,27 @@
 <script setup>
-import { RouterLink } from 'vue-router'
-import { settingsStore } from '@/store/settings';
+import { useSettingsStore } from '@/store/settings';
+import { useCountersStore } from '@/store/counters';
 import { Columns, Rows, Plus, Hash } from 'lucide-vue-next';
 
-const store = settingsStore()
-
-const addCounter = () => {
-    store.counters.push(store.counters.length + 1)
-}
-
-const toggleColumn = () => {
-    store.columnCount = 2
-}
-const toggleRow = () => {
-    store.columnCount = 1
-}
+const settings = useSettingsStore()
+const counters = useCountersStore()
 
 </script>
 
 <template>
-    <div class="header">
-        <button class="--btn-icon" @click="addCounter">
+    <div class="header" :style="{ background: counters.winnerGradient }">
+        <button class="--btn-icon" @click="counters.createCounter()">
             <Plus />
         </button>
         <div class="header__title">
             <Hash />
-            <span v-if="store.counters.length > 0">({{ store.counters.length }})</span>
-            <!-- <RouterLink class="header__link" to="/">
-                Counters
-                <span v-if="store.counters.length > 0">({{ store.counters.length }})</span>
-            </RouterLink> -->
-            <!-- <RouterLink class="header__link" to="/settings">Settings</RouterLink> -->
+            <span v-if="counters.counters.length > 0">({{ counters.counters.length }})</span>
         </div>
         <div>
-            <button v-if="store.columnCount == 1" class="--btn-icon" @click="toggleColumn">
+            <button v-if="settings.columnCount == 1" class="--btn-icon" @click="settings.setColumns()">
                 <Columns />
             </button>
-            <button v-if="store.columnCount == 2" class="--btn-icon" @click="toggleRow">
+            <button v-if="settings.columnCount == 2" class="--btn-icon" @click="settings.setRows()">
                 <Rows />
             </button>
         </div>

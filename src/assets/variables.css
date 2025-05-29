@@ -1,9 +1,37 @@
 :root {
     --light: #FFFFFF;
-    --grey: #dbdbdb;
     --light-grey: #d8d8d8;
-    --dark-grey: #b0b0b0;
+    --grey: #dbdbdb;
     --middle-grey: #c4c4c4;
+    --dark-grey: #b0b0b0;
+
+    --clr-red-500: #cf1919;
+    --clr-red-600: #b30f0f;
+    --clr-red-700: #9a0c0c;
+    --clr-green-500: #1f9d55;
+    --clr-green-600: #1a8b4e;
+    --clr-green-700: #147a46;
+    --clr-blue-500: #2d9cdb;
+    --clr-blue-600: #2687c4;
+    --clr-blue-700: #1f73ad;
+    --clr-yellow-500: #f2c94c;
+    --clr-yellow-600: #e0b43f;
+    --clr-yellow-700: #cda934;
+    --clr-purple-500: #9b51e0;
+    --clr-purple-600: #8a46c9;
+    --clr-purple-700: #793ccf;
+    --clr-orange-500: #f2994a;
+    --clr-orange-600: #e08b3f;
+    --clr-orange-700: #cd7f34;
+    --clr-pink-500: #f2a0c4;
+    --clr-pink-600: #e08bb3;
+    --clr-pink-700: #cd7f9a;
+    --clr-brown-500: #a0522d;
+    --clr-brown-600: #8b4513;
+    --clr-brown-700: #7a3d0c;
+    --clr-grey-500: #dbdbdb;
+    --clr-grey-600: #c4c4c4;
+    --clr-grey-700: #b0b0b0;
 
     --shadow-color: rgba(53, 53, 53, 0.59);
     --default-shadow: 0px 0px 4px 0px var(--shadow-color);

@@ -1,8 +1,7 @@
 <script setup>
-import { onMounted } from 'vue'
-import { settingsStore } from '@/store/settings'
+import { useSettingsStore } from '@/store/settings'
 
-const store = settingsStore()
+const store = useSettingsStore()
 </script>
 
 <template>
