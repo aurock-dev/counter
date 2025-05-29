@@ -1,5 +1,5 @@
 <script setup>
-import { ref, onMounted } from 'vue'
+import { ref, computed } from 'vue'
 import { Trash2, EllipsisVertical, Check, Minus, Plus, RotateCw, Circle } from 'lucide-vue-next'
 import { settingsStore } from '@/store/settings'
 
@@ -8,26 +8,38 @@ const props = defineProps({
 })
 
 const store = settingsStore()
-const counter = ref(0)
-const counterName = ref('Counter name')
 const isEditing = ref(false)
-const rotation = ref(0)
 const optionsState = ref(false)
+
 const colorList = [
-    'var(--clr-green-500)',
-    'var(--clr-blue-500)',
     'var(--clr-red-500)',
+    'var(--clr-blue-500)',
     'var(--clr-yellow-500)',
     'var(--clr-purple-500)',
-    'var(--clr-orange-500)'
+    'var(--clr-green-500)',
+    'var(--clr-orange-500)',
 ]
 
+const counter = computed(() => currentCounter.value.value)
+const counterName = computed({
+    get: () => currentCounter.value?.name ?? 'Unnamed',
+    set: (val) => {
+        store.updateCounter(props.id, { name: val })
+    }
+})
+const currentColor = computed(() => currentCounter.value.color)
+const rotated = computed(() => currentCounter.value.rotated)
+
+const currentCounter = computed(() => {
+    return store.counters.find(c => c.id === props.id) || { value: 0, name: '', color: colorList[0], rotated: false }
+})
+
 const increment = () => {
-    counter.value++
+    store.updateCounter(props.id, { value: counter.value + 1 })
 }
 
 const decrement = () => {
-    counter.value--
+    store.updateCounter(props.id, { value: counter.value - 1 })
 }
 
 const startEditing = () => {
@@ -35,18 +47,16 @@ const startEditing = () => {
 }
 
 const stopEditing = () => {
+    store.updateCounter(props.id, { name: counterName.value })
     isEditing.value = false
 }
 
 const deleteCounter = () => {
-    store.counters = store.counters.filter(counterId => counterId !== props.id)
+    store.deleteCounter(props.id)
 }
 
 const rotate = () => {
-    rotation.value += 180
-    if (rotation.value > 180) {
-        rotation.value = 0
-    }
+    store.updateCounter(props.id, { rotated: !currentCounter.value.rotated })
     optionsState.value = false
 }
 
@@ -54,19 +64,17 @@ const toggleOptions = () => {
     optionsState.value = !optionsState.value
 }
 
-const changeColor = () => {
-
+const changeColor = (color) => {
+    store.updateCounter(props.id, { color })
+    optionsState.value = false
 }
-
-onMounted(() => {
-    counter.value = store.counterValue
-})
 
 </script>
 
 <template>
-    <div class="counter" :style="{ transform: `rotate(${rotation}deg)` }">
-        <div class="counter__header">
+    <div class="counter"
+        :style="{ transform: rotated ? 'rotate(180deg)' : 'rotate(0deg)', backgroundColor: currentColor }">
+        <div class="counter__header" :style="{ backgroundColor: currentColor.replace('500', '600') }">
             <div v-if="!isEditing" class="counter__option" :class="{ 'counter__option--open': optionsState }"
                 @click="toggleOptions">
                 <EllipsisVertical />
@@ -79,8 +87,8 @@ onMounted(() => {
                     <Trash2 color="black" />
                 </button>
                 <div v-for="color in colorList">
-                    <button class="--outline" @click="changeColor">
-                        <Circle :color="color" />
+                    <button class="--outline" @click="changeColor(color)">
+                        <Circle :color="color.replace('500', '700')" :fill="color" />
                     </button>
                 </div>
             </div>
@@ -143,6 +151,7 @@ onMounted(() => {
             display: flex;
             gap: 10px;
             width: 100%;
+            overflow: auto;
         }
 
         .counter__options>div {

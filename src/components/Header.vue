@@ -6,7 +6,17 @@ import { Columns, Rows, Plus, Hash } from 'lucide-vue-next';
 const store = settingsStore()
 
 const addCounter = () => {
-    store.counters.push(store.counters.length + 1)
+    const newId = store.counters.length
+        ? Math.max(...store.counters.map(c => c.id)) + 1
+        : 1
+
+    store.counters.push({
+        id: newId,
+        value: 0,
+        name: `Counter ${newId}`,
+        color: 'var(--clr-grey-500)',
+        rotated: false,
+    })
 }
 
 const toggleColumn = () => {

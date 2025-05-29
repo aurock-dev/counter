@@ -8,16 +8,11 @@ const store = settingsStore()
 const layoutClass = computed(() => {
     return store.columnCount === 2 ? 'two-col' : 'one-col'
 })
-
-onMounted(async () => {
-    store.counters = Array.from({ length: store.counters.length }, (_, i) => i + 1)
-})
-
 </script>
 
 <template>
     <div :class="['app', layoutClass]">
-        <Counter v-for="id in store.counters" :key="id" :id="id" />
+        <Counter v-for="counter in store.counters" :key="counter.id" :id="counter.id" />
     </div>
 </template>
 
