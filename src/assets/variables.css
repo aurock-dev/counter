@@ -1,9 +1,6 @@
 :root {
-    --light: #FFFFFF;
-    --light-grey: #d8d8d8;
-    --grey: #dbdbdb;
-    --middle-grey: #c4c4c4;
-    --dark-grey: #b0b0b0;
+    --clr-white: #FFFFFF;
+    --clr-black: #000000;
 
     --clr-red-500: #cf1919;
     --clr-red-600: #b30f0f;
@@ -14,9 +11,9 @@
     --clr-blue-500: #2d9cdb;
     --clr-blue-600: #2687c4;
     --clr-blue-700: #1f73ad;
-    --clr-yellow-500: #f2c94c;
-    --clr-yellow-600: #e0b43f;
-    --clr-yellow-700: #cda934;
+    --clr-yellow-500: #e4be4d;
+    --clr-yellow-600: #d4b040;
+    --clr-yellow-700: #c4a433;
     --clr-purple-500: #9b51e0;
     --clr-purple-600: #8a46c9;
     --clr-purple-700: #793ccf;
@@ -29,12 +26,13 @@
     --clr-brown-500: #a0522d;
     --clr-brown-600: #8b4513;
     --clr-brown-700: #7a3d0c;
-    --clr-grey-500: #dbdbdb;
-    --clr-grey-600: #c4c4c4;
-    --clr-grey-700: #b0b0b0;
+    --clr-grey-500: #8a8c91;
+    --clr-grey-600: #7a7c80;
+    --clr-grey-700: #6a6c70;
 
-    --shadow-color: rgba(53, 53, 53, 0.59);
-    --default-shadow: 0px 0px 4px 0px var(--shadow-color);
+
+    --shadow-color: rgba(53, 53, 53, 0.641);
+    --default-shadow: 3px 3px 6px 0px var(--shadow-color);
 
     --font: Verdana, Arial, Helvetica, sans-serif;
 

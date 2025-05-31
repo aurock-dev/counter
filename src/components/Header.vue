@@ -9,7 +9,7 @@ const counters = useCountersStore()
 </script>
 
 <template>
-    <div class="header" :style="{ background: counters.winnerGradient }">
+    <div class="header">
         <button class="--btn-icon" @click="counters.createCounter()">
             <Plus />
         </button>
@@ -37,28 +37,12 @@ const counters = useCountersStore()
     justify-content: space-between;
     align-items: center;
     padding: 2px 5px;
-    background-color: var(--dark-grey);
-    color: var(--light);
+    color: var(--clr-white);
 
     .header__title {
         display: flex;
         align-items: center;
         height: 100%;
-    }
-
-    .header__links {
-        display: flex;
-        gap: 20px;
-
-        .header__link {
-            color: var(--light-grey);
-            text-decoration: none;
-        }
-
-        .header__link.router-link-active {
-            color: var(--light);
-            font-weight: bold;
-        }
     }
 }
 </style>

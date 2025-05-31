@@ -79,14 +79,14 @@ const changeColor = (color) => {
         <div class="counter__header" :style="{ backgroundColor: currentColorHeader }">
             <div v-if="!isEditing" class="counter__option" :class="{ 'counter__option--open': optionsState }"
                 @click="toggleOptions">
-                <EllipsisVertical />
+                <EllipsisVertical color="var(--clr-white)" />
             </div>
             <div v-if="optionsState" class="counter__options">
                 <button class="--outline" @click="rotate">
-                    <RotateCw color="black" />
+                    <RotateCw color="var(--clr-white)" />
                 </button>
                 <button class="--outline" @click="deleteCounter">
-                    <Trash2 color="black" />
+                    <Trash2 color="var(--clr-white)" />
                 </button>
                 <div v-for="color in colorList">
                     <button class="--outline" @click="changeColor(color)">
@@ -127,6 +127,7 @@ const changeColor = (color) => {
     align-items: center;
     border-radius: 10px;
     background-color: var(--clr-grey-500);
+    box-shadow: var(--default-shadow);
     overflow: hidden;
 
     .counter__header {
@@ -165,6 +166,7 @@ const changeColor = (color) => {
             white-space: nowrap;
             overflow: hidden;
             text-overflow: ellipsis;
+            color: var(--clr-white);
 
             .counter__name--p {
                 text-overflow: ellipsis;
@@ -202,6 +204,7 @@ const changeColor = (color) => {
             height: 100%;
             overflow: hidden;
             text-overflow: ellipsis;
+            color: var(--clr-white);
         }
     }
 }
