@@ -3,17 +3,27 @@ import { ref, computed } from 'vue';
 
 export const useCountersStore = defineStore('counters', () => {
     const counters = ref([]);
+    const colorList = ref([
+        'var(--clr-red-500)',
+        'var(--clr-blue-500)',
+        'var(--clr-yellow-500)',
+        'var(--clr-purple-500)',
+        'var(--clr-green-500)',
+        'var(--clr-orange-500)',
+    ])
 
     function createCounter() {
         const newId = counters.value.length
             ? Math.max(...counters.value.map(c => c.id)) + 1
-            : 1;
+            : 0;
+
+        const color = colorList.value[newId] ?? 'var(--clr-grey-500)';
 
         counters.value.push({
             id: newId,
             value: 0,
             name: `Counter ${newId}`,
-            color: 'var(--clr-grey-500)',
+            color: color,
             rotated: false,
         });
     }
@@ -51,7 +61,8 @@ export const useCountersStore = defineStore('counters', () => {
         createCounter,
         updateCounter,
         deleteCounter,
-        winnerGradient
+        winnerGradient,
+        colorList
     };
 }, {
     persist: true

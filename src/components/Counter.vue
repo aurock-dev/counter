@@ -11,15 +11,6 @@ const counters = useCountersStore()
 const isEditing = ref(false)
 const optionsState = ref(false)
 
-const colorList = [
-    'var(--clr-red-500)',
-    'var(--clr-blue-500)',
-    'var(--clr-yellow-500)',
-    'var(--clr-purple-500)',
-    'var(--clr-green-500)',
-    'var(--clr-orange-500)',
-]
-
 const counter = computed(() => currentCounter.value.value)
 const counterName = computed({
     get: () => currentCounter.value?.name ?? 'Unnamed',
@@ -33,7 +24,7 @@ const currentColorButton = computed(() => currentCounter.value.color.replace('50
 const rotated = computed(() => currentCounter.value.rotated)
 
 const currentCounter = computed(() => {
-    return counters.counters.find(c => c.id === props.id) || { value: 0, name: '', color: colorList[0], rotated: false }
+    return counters.counters.find(c => c.id === props.id) || { value: 0, name: '', color: counters.colorList[0], rotated: false }
 })
 
 const increment = () => {
@@ -88,7 +79,7 @@ const changeColor = (color) => {
                 <button class="--outline" @click="deleteCounter">
                     <Trash2 color="var(--clr-white)" />
                 </button>
-                <div v-for="color in colorList">
+                <div v-for="color in counters.colorList">
                     <button class="--outline" @click="changeColor(color)">
                         <Circle :color="color.replace('500', '700')" :fill="color" />
                     </button>

@@ -25,6 +25,7 @@ const layoutClass = computed(() => {
     flex-direction: column;
     gap: 10px;
     padding: 10px;
+    overflow: auto;
 }
 
 .app.two-col {
@@ -33,6 +34,7 @@ const layoutClass = computed(() => {
     grid-template-columns: repeat(2, 1fr);
     gap: 10px;
     padding: 10px;
+    overflow: auto;
 }
 
 .add__counter {
