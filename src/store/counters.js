@@ -22,7 +22,7 @@ export const useCountersStore = defineStore('counters', () => {
         counters.value.push({
             id: newId,
             count: 0,
-            name: `Counter ${newId}`,
+            name: `Player ${newId}`,
             color: color,
             rotated: false,
         });
