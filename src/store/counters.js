@@ -21,7 +21,7 @@ export const useCountersStore = defineStore('counters', () => {
 
         counters.value.push({
             id: newId,
-            value: 0,
+            count: 0,
             name: `Counter ${newId}`,
             color: color,
             rotated: false,
@@ -45,8 +45,8 @@ export const useCountersStore = defineStore('counters', () => {
     const winnerGradient = computed(() => {
         if (!counters.value.length) return 'var(--clr-grey-500)';
 
-        const max = Math.max(...counters.value.map(c => c.value));
-        const winners = counters.value.filter(c => c.value === max);
+        const max = Math.max(...counters.value.map(c => c.count));
+        const winners = counters.value.filter(c => c.count === max);
 
         if (winners.length === 1) {
             return winners[0].color;

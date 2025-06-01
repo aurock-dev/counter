@@ -2,6 +2,7 @@
 import { ref, computed } from 'vue'
 import { Trash2, EllipsisVertical, Check, Minus, Plus, RotateCw, Circle } from 'lucide-vue-next'
 import { useCountersStore } from '@/store/counters'
+import CounterButtons from './CounterButtons.vue'
 
 const props = defineProps({
     id: Number
@@ -11,7 +12,6 @@ const counters = useCountersStore()
 const isEditing = ref(false)
 const optionsState = ref(false)
 
-const counter = computed(() => currentCounter.value.value)
 const counterName = computed({
     get: () => currentCounter.value?.name ?? 'Unnamed',
     set: (val) => {
@@ -20,20 +20,11 @@ const counterName = computed({
 })
 const currentColor = computed(() => currentCounter.value.color)
 const currentColorHeader = computed(() => currentCounter.value.color.replace('500', '700'))
-const currentColorButton = computed(() => currentCounter.value.color.replace('500', '600'))
 const rotated = computed(() => currentCounter.value.rotated)
 
 const currentCounter = computed(() => {
     return counters.counters.find(c => c.id === props.id) || { value: 0, name: '', color: counters.colorList[0], rotated: false }
 })
-
-const increment = () => {
-    counters.updateCounter(props.id, { value: counter.value + 1 })
-}
-
-const decrement = () => {
-    counters.updateCounter(props.id, { value: counter.value - 1 })
-}
 
 const startEditing = () => {
     isEditing.value = true
@@ -95,15 +86,7 @@ const changeColor = (color) => {
                 </div>
             </template>
         </div>
-        <div class="counter__buttons">
-            <button class="counter__button" @click="decrement" :style="{ backgroundColor: currentColorButton }">
-                <Minus />
-            </button>
-            <p class="counter__value">{{ counter }}</p>
-            <button class="counter__button" @click="increment" :style="{ backgroundColor: currentColorButton }">
-                <Plus />
-            </button>
-        </div>
+        <CounterButtons :id="props.id" />
     </div>
 </template>
 
@@ -168,34 +151,6 @@ const changeColor = (color) => {
             display: flex;
             gap: 10px;
             width: 100%;
-        }
-    }
-
-    .counter__buttons {
-        display: flex;
-        align-items: center;
-        justify-content: space-between;
-        width: 100%;
-        height: 100%;
-
-        .counter__button {
-            width: 5em;
-            height: 100%;
-            padding: 0;
-            gap: 0;
-            border-radius: 0;
-            box-shadow: none;
-        }
-
-        .counter__value {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            width: 100%;
-            height: 100%;
-            overflow: hidden;
-            text-overflow: ellipsis;
-            color: var(--clr-white);
         }
     }
 }
