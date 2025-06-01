@@ -19,6 +19,7 @@ const store = useSettingsStore()
 
 <style scoped>
 .app {
+    height: calc(100vh - var(--header-height) - var(--footer-height));
     display: flex;
     flex-direction: column;
     gap: 20px;

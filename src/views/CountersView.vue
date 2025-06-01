@@ -20,7 +20,7 @@ const layoutClass = computed(() => {
 
 <style scoped>
 .app.one-col {
-    height: calc(100vh - var(--header-height));
+    height: calc(100vh - var(--header-height) - var(--footer-height));
     display: flex;
     flex-direction: column;
     gap: 10px;
@@ -29,7 +29,7 @@ const layoutClass = computed(() => {
 }
 
 .app.two-col {
-    height: calc(100vh - var(--header-height));
+    height: calc(100vh - var(--header-height) - var(--footer-height));
     display: grid;
     grid-template-columns: repeat(2, 1fr);
     gap: 10px;
