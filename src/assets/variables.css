@@ -32,7 +32,8 @@
 
 
     --shadow-color: rgba(53, 53, 53, 0.641);
-    --default-shadow: 3px 3px 6px 0px var(--shadow-color);
+    --counter-shadow: 3px 3px 6px 0px var(--shadow-color);
+    --button-shadow: 0px 0px 5px 0px var(--shadow-color);
 
     --font: Verdana, Arial, Helvetica, sans-serif;
 

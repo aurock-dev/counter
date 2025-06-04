@@ -101,7 +101,7 @@ const changeColor = (color) => {
     align-items: center;
     border-radius: 10px;
     background-color: var(--clr-grey-500);
-    box-shadow: var(--default-shadow);
+    box-shadow: var(--counter-shadow);
     overflow: hidden;
 
     .counter__header {

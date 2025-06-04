@@ -20,7 +20,8 @@ button {
     border: none;
     border-radius: 10px;
     color: var(--clr-white);
-    box-shadow: var(--default-shadow);
+    background-color: var(--clr-blue-500);
+    box-shadow: var(--button-shadow);
 }
 
 button:hover {
