@@ -9,7 +9,7 @@ const counters = useCountersStore()
 </script>
 
 <template>
-    <div class="header">
+    <div class="header" :style="{ background: counters.winnerGradient }">
         <button class="--btn-icon" @click="counters.createCounter()">
             <Plus />
         </button>

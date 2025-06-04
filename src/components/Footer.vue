@@ -1,15 +1,14 @@
 <script setup>
 import { Hash, Settings } from 'lucide-vue-next';
 
-
 </script>
 
 <template>
     <div class="footer">
-        <RouterLink class="footer__links" to="/">
+        <RouterLink class="footer__link" to="/">
             <Hash />
         </RouterLink>
-        <RouterLink class="footer__links" to="/settings">
+        <RouterLink class="footer__link" to="/settings">
             <Settings />
         </RouterLink>
     </div>
@@ -23,12 +22,18 @@ import { Hash, Settings } from 'lucide-vue-next';
     align-items: center;
     justify-content: space-evenly;
 
-    .footer__link svg {
-        color: var(--clr-white);
+    .footer__link {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        color: var(--clr-black);
+        padding: 5px;
     }
 
     .footer__link.router-link-active {
-        color: var(--clr-white);
+        color: var(--clr-black);
+        border: 2px solid var(--clr-black);
+        border-radius: 7px;
     }
 }
 </style>
