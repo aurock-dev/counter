@@ -3,7 +3,7 @@ import { computed } from 'vue'
 import { useSettingsStore } from '@/store/settings';
 import { useCountersStore } from '@/store/counters';
 import Counter from '@/components/Counter.vue';
-import Header from '@/components/Header.vue';
+import HeaderCounter from '@/components/HeaderCounter.vue';
 
 const settings = useSettingsStore()
 const counters = useCountersStore()
@@ -14,7 +14,7 @@ const layoutClass = computed(() => {
 </script>
 
 <template>
-    <Header />
+    <HeaderCounter />
     <div :class="['app', layoutClass]">
         <Counter v-for="counter in counters.counters" :key="counter.id" :id="counter.id" />
     </div>

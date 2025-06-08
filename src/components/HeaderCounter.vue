@@ -10,13 +10,6 @@ const counters = useCountersStore()
 
 <template>
     <div class="header" :style="settings.optionWinnerColor === 1 ? { background: counters.winnerGradient } : {}">
-        <button class="--btn-icon" @click="counters.createCounter()">
-            <Plus />
-        </button>
-        <div class="header__title">
-            <Hash />
-            <span v-if="counters.counters.length > 0">({{ counters.counters.length }})</span>
-        </div>
         <div>
             <button v-if="settings.columnCount == 1" class="--btn-icon" @click="settings.setColumns()">
                 <Columns />
@@ -25,6 +18,13 @@ const counters = useCountersStore()
                 <Rows />
             </button>
         </div>
+        <div class="header__title">
+            <Hash />
+            <span v-if="counters.counters.length > 0">({{ counters.counters.length }})</span>
+        </div>
+        <button class="--btn-icon" @click="counters.createCounter()">
+            <Plus />
+        </button>
     </div>
 </template>
 
