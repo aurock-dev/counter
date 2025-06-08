@@ -2,7 +2,7 @@
 import { ref } from 'vue'
 import { useSettingsStore } from '@/store/settings';
 import { useCountersStore } from '@/store/counters';
-import { Columns, Rows, Plus, Hash, EllipsisVertical } from 'lucide-vue-next';
+import { Columns, Rows, Plus, Hash, EllipsisVertical, TrendingUp, TrendingDown } from 'lucide-vue-next';
 
 const settings = useSettingsStore()
 const counters = useCountersStore()
@@ -28,6 +28,14 @@ const toggleOptions = () => {
                     <Rows />
                 </button>
             </div>
+            <div>
+                <button v-if="counters.mostPointFirst" class="--btn-icon" @click="counters.leastPointWin()">
+                    <TrendingUp />
+                </button>
+                <button v-if="!counters.mostPointFirst" class="--btn-icon" @click="counters.mostPointWin()">
+                    <TrendingDown />
+                </button>
+            </div>
         </div>
         <div v-if="!optionsState" class="header__title">
             <Hash />
@@ -47,6 +55,7 @@ const toggleOptions = () => {
     flex-direction: row;
     justify-content: space-between;
     align-items: center;
+    gap: 10px;
     padding: 2px 5px;
     color: var(--clr-white);
 
@@ -67,6 +76,7 @@ const toggleOptions = () => {
 
     .header__options {
         display: flex;
+        gap: 10px;
         width: 100%;
     }
 }
