@@ -3,6 +3,7 @@ import { computed } from 'vue'
 import { useSettingsStore } from '@/store/settings';
 import { useCountersStore } from '@/store/counters';
 import Counter from '@/components/Counter.vue';
+import HeaderCounter from '@/components/HeaderCounter.vue';
 
 const settings = useSettingsStore()
 const counters = useCountersStore()
@@ -13,6 +14,7 @@ const layoutClass = computed(() => {
 </script>
 
 <template>
+    <HeaderCounter />
     <div :class="['app', layoutClass]">
         <Counter v-for="counter in counters.counters" :key="counter.id" :id="counter.id" />
     </div>
@@ -20,19 +22,21 @@ const layoutClass = computed(() => {
 
 <style scoped>
 .app.one-col {
-    height: calc(100vh - var(--header-height));
+    height: calc(100vh - var(--header-height) - var(--footer-height));
     display: flex;
     flex-direction: column;
     gap: 10px;
     padding: 10px;
+    overflow: auto;
 }
 
 .app.two-col {
-    height: calc(100vh - var(--header-height));
+    height: calc(100vh - var(--header-height) - var(--footer-height));
     display: grid;
     grid-template-columns: repeat(2, 1fr);
     gap: 10px;
     padding: 10px;
+    overflow: auto;
 }
 
 .add__counter {

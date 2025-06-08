@@ -19,9 +19,9 @@ button {
     height: max-content;
     border: none;
     border-radius: 10px;
-    background-color: var(--dark-grey);
-    color: var(--light);
-    box-shadow: var(--default-shadow);
+    color: var(--clr-white);
+    background-color: var(--clr-blue-500);
+    box-shadow: var(--button-shadow);
 }
 
 button:hover {
@@ -38,7 +38,6 @@ button.--btn-icon {
 button.--outline {
     box-shadow: none;
     background: none;
-    /* border: solid 2px var(--middle-grey); */
 }
 
 input {
