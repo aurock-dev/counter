@@ -1,6 +1,6 @@
 <script setup>
 import { ref, computed } from 'vue'
-import { Trash2, EllipsisVertical, Check, Minus, Plus, RotateCw, Circle } from 'lucide-vue-next'
+import { Trash2, EllipsisVertical, Check, Minus, Plus, RotateCw, Circle, Crown } from 'lucide-vue-next'
 import { useCountersStore } from '@/store/counters'
 import CounterButtons from './CounterButtons.vue'
 
@@ -23,7 +23,7 @@ const currentColorHeader = computed(() => currentCounter.value.color.replace('50
 const rotated = computed(() => currentCounter.value.rotated)
 
 const currentCounter = computed(() => {
-    return counters.counters.find(c => c.id === props.id) || { value: 0, name: '', color: counters.colorList[0], rotated: false }
+    return counters.counters.find(c => c.id === props.id) || { value: 0, name: '', color: counters.colorList[0], rotated: false, winner: false }
 })
 
 const startEditing = () => {
@@ -82,9 +82,10 @@ const changeColor = (color) => {
                 </div>
                 <div v-if="isEditing" class="counter__input">
                     <input v-model="counterName" type="text" @keyup.enter="stopEditing" />
-                    <Check @click="stopEditing" />
+                    <Check color="var(--clr-white)" @click="stopEditing" />
                 </div>
             </template>
+            <Crown v-if="currentCounter.winner && !isEditing" color="var(--clr-white)" />
         </div>
         <CounterButtons :id="props.id" />
     </div>
