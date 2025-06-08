@@ -1,28 +1,39 @@
 <script setup>
+import { ref } from 'vue'
 import { useSettingsStore } from '@/store/settings';
 import { useCountersStore } from '@/store/counters';
-import { Columns, Rows, Plus, Hash } from 'lucide-vue-next';
+import { Columns, Rows, Plus, Hash, EllipsisVertical } from 'lucide-vue-next';
 
 const settings = useSettingsStore()
 const counters = useCountersStore()
 
+const optionsState = ref(false)
+
+const toggleOptions = () => {
+    optionsState.value = !optionsState.value
+}
 </script>
 
 <template>
     <div class="header" :style="settings.optionWinnerColor === 1 ? { background: counters.winnerGradient } : {}">
-        <div>
-            <button v-if="settings.columnCount == 1" class="--btn-icon" @click="settings.setColumns()">
-                <Columns />
-            </button>
-            <button v-if="settings.columnCount == 2" class="--btn-icon" @click="settings.setRows()">
-                <Rows />
-            </button>
+        <div class="header__option" :class="{ 'header__option--open': optionsState }" @click="toggleOptions">
+            <EllipsisVertical color="var(--clr-white)" />
         </div>
-        <div class="header__title">
+        <div v-if="optionsState" class="header__options">
+            <div>
+                <button v-if="settings.columnCount == 1" class="--btn-icon" @click="settings.setColumns()">
+                    <Columns />
+                </button>
+                <button v-if="settings.columnCount == 2" class="--btn-icon" @click="settings.setRows()">
+                    <Rows />
+                </button>
+            </div>
+        </div>
+        <div v-if="!optionsState" class="header__title">
             <Hash />
             <span v-if="counters.counters.length > 0">({{ counters.counters.length }})</span>
         </div>
-        <button class="--btn-icon" @click="counters.createCounter()">
+        <button v-if="!optionsState" class="--btn-icon" @click="counters.createCounter()">
             <Plus />
         </button>
     </div>
@@ -43,6 +54,20 @@ const counters = useCountersStore()
         display: flex;
         align-items: center;
         height: 100%;
+    }
+
+    .header__option {
+        display: flex;
+        transition: transform 0.15s ease;
+    }
+
+    .header__option--open {
+        transform: rotate(90deg);
+    }
+
+    .header__options {
+        display: flex;
+        width: 100%;
     }
 }
 </style>
