@@ -21,10 +21,10 @@ const toggleOptions = () => {
         </div>
         <div v-if="optionsState" class="header__options">
             <div>
-                <button v-if="settings.columnCount == 1" class="--btn-icon" @click="settings.setColumns()">
+                <button v-if="settings.columnCount == 2" class="--btn-icon" @click="settings.setRows()">
                     <Columns />
                 </button>
-                <button v-if="settings.columnCount == 2" class="--btn-icon" @click="settings.setRows()">
+                <button v-if="settings.columnCount == 1" class="--btn-icon" @click="settings.setColumns()">
                     <Rows />
                 </button>
             </div>
