@@ -14,8 +14,6 @@ const changeWinnerColor = (option) => {
         <div class="settings__winnercolor">
             <p>Display winner(s) color(s) :</p>
             <div class="settings__winnercolor_options">
-                <button :class="{ '--btn-selected': settings.optionWinnerColor === 0 }"
-                    @click="changeWinnerColor(0)">Nowhere</button>
                 <button :class="{ '--btn-selected': settings.optionWinnerColor === 1 }"
                     @click="changeWinnerColor(1)">Header/Footer</button>
                 <button :class="{ '--btn-selected': settings.optionWinnerColor === 2 }"
