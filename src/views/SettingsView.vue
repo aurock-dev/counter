@@ -12,22 +12,29 @@ const changeWinnerColor = (option) => {
 
 <template>
     <div class="settings" :class="[settings.optionWinnerColor === 1 ? 'settings-accentBlack' : 'settings-accentWhite']">
-        <div class="settings__section">
-            <span class="settings__title">Display winner color :</span>
-            <div class="settings__toggle-group">
-                <div class="settings__toggle"
-                    :class="{ 'settings__toggle--selected': settings.optionWinnerColor === 1 }"
-                    @click="changeWinnerColor(1)">
-                    <StretchHorizontal />
-                    <span>Header/Footer</span>
-                </div>
-                <div class="settings__toggle"
-                    :class="{ 'settings__toggle--selected': settings.optionWinnerColor === 2 }"
-                    @click="changeWinnerColor(2)">
-                    <Square />
-                    <span>Everywhere</span>
+        <div class="settings__container">
+            <div class="settings__block">
+                <span class="settings__title">Display winner color :</span>
+                <div class="settings__toggle-group">
+                    <div class="settings__toggle"
+                        :class="{ 'settings__toggle--selected': settings.optionWinnerColor === 1 }"
+                        @click="changeWinnerColor(1)">
+                        <StretchHorizontal />
+                        <span>Header/Footer</span>
+                    </div>
+                    <div class="settings__toggle"
+                        :class="{ 'settings__toggle--selected': settings.optionWinnerColor === 2 }"
+                        @click="changeWinnerColor(2)">
+                        <Square />
+                        <span>Everywhere</span>
+                    </div>
                 </div>
             </div>
+        </div>
+        <div class="settings__about">
+            <div>Coloful Counters (C#)</div>
+            <div>V1.0.0</div>
+            <div>Made with ton of 🐛 by <a href="https://aurock.dev" target="_blank">Aurock</a></div>
         </div>
     </div>
 </template>
@@ -35,6 +42,8 @@ const changeWinnerColor = (option) => {
 <style scoped>
 .settings {
     height: calc(100vh - var(--footer-height));
+    display: flex;
+    flex-direction: column;
     padding: 20px;
 }
 
@@ -54,7 +63,11 @@ const changeWinnerColor = (option) => {
     border: 2px solid var(--clr-white);
 }
 
-.settings__section {
+.settings__container{
+    height: 100%
+}
+
+.settings__block {
     display: flex;
     flex-direction: column;
     gap: 10px;
@@ -84,5 +97,10 @@ const changeWinnerColor = (option) => {
     flex-direction: column;
     align-items: center;
     gap: 10px;
+}
+
+.settings__about{
+    font-size: 0.75em;
+    text-align: center;
 }
 </style>
