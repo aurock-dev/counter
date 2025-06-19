@@ -1,7 +1,12 @@
 <script setup>
+import pkg from '../../package.json'
+import { ref } from 'vue'
 import { useSettingsStore } from '@/store/settings'
 import { StretchHorizontal, Square } from 'lucide-vue-next';
+import Changelog from '@/components/Changelog.vue'
 
+const showChangelog = ref(false)
+const version = pkg.version
 
 const settings = useSettingsStore()
 
@@ -33,9 +38,10 @@ const changeWinnerColor = (option) => {
         </div>
         <div class="settings__about">
             <div>Coloful Counters (C#)</div>
-            <div>V1.0.0</div>
+            <div @click="showChangelog = true">V{{ version }}</div>
             <div>Made with ton of 🐛 by <a href="https://aurock.dev" target="_blank">Aurock</a></div>
         </div>
+         <Changelog :visible="showChangelog" @close="showChangelog = false" />
     </div>
 </template>
 
