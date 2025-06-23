@@ -58,6 +58,7 @@ watch(() => props.visible, (newVal) => {
     justify-content: center;
     z-index: 9999;
     backdrop-filter: blur(8px);
+    color: black;
 }
 
 .modal {

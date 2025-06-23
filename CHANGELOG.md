@@ -1,6 +1,14 @@
-[V1.0.0]
+[V1.0.1]  
+> 🐛 O no.
 
-🚀 Ok, Let's go !
+### Removed
+- Remove PWA.
+
+### Fixed
+- Fix changelog font color issue in "everywhere" color settings.
+
+[V1.0.0]  
+> 🚀 Ok, Let's go !
 
 ### Added
 - Add counter page :
