@@ -28,3 +28,22 @@ coverage
 *.sw?
 
 *.tsbuildinfo
+
+# Node.js
+node_modules/
+dist/             
+build/             
+.env*              
+
+# Capacitor
+.idea/           
+.vscode/
+.DS_Store
+*.iml
+
+# Capacitor build artifacts
+android/.gradle/
+android/.idea/
+android/build/
+android/app/build/
+android/local.properties
