@@ -38,7 +38,7 @@ const changeWinnerColor = (option) => {
         </div>
         <div class="settings__about">
             <div>Colorful Counters (C#)</div>
-            <div @click="showChangelog = true">V{{ version }}</div>
+            <div @click="showChangelog = true"> > V{{ version }} < </div>
             <div>Made with ton of 🐛 by <a href="https://aurock.dev" target="_blank">Aurock</a></div>
         </div>
          <Changelog :visible="showChangelog" @close="showChangelog = false" />
