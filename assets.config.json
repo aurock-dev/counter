@@ -1,0 +1,6 @@
+{
+  "resourcesDirectory": "./assets",
+  "icon": {
+    "sources": ["icon.png"]
+  }
+}
