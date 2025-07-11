@@ -1,5 +1,5 @@
 [V1.0.1]  
-> 🐛 O no.
+> 🐛 O no...
 
 ### Removed
 - Remove PWA.
