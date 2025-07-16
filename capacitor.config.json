@@ -1,5 +1,10 @@
 {
   "appId": "cc.aurock.dev",
   "appName": "Colorful Counter",
-  "webDir": "dist"
+  "webDir": "dist",
+  "android": {
+    "versionCode": 2,
+    "versionName": "1.0.2",
+    "adjustMarginsForEdgeToEdge": "force"
+  }
 }

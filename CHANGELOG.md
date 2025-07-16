@@ -1,3 +1,9 @@
+[V1.0.2]  
+> 🐛 Meh
+
+### Fixed
+- Fix screen edge on some Android version.
+
 [V1.0.1]  
 > 🐛 O no...
 
