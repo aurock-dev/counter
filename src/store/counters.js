@@ -52,6 +52,7 @@ export const useCountersStore = defineStore('counters', () => {
         counters.value.forEach(counter => {
             counter.count = 0
         });
+        updateWinners();
     }
 
     function mostPointWin() {
