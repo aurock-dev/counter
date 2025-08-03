@@ -43,7 +43,7 @@ const decrement = () => {
     height: 100%;
 
     .counter__button {
-        width: 5em;
+        width: 7em;
         height: 100%;
         padding: 0;
         gap: 0;
