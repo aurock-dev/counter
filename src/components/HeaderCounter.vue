@@ -2,7 +2,7 @@
 import { ref } from 'vue'
 import { useSettingsStore } from '@/store/settings';
 import { useCountersStore } from '@/store/counters';
-import { Columns, Rows, Plus, Hash, EllipsisVertical, TrendingUp, TrendingDown } from 'lucide-vue-next';
+import { Columns, Rows, Plus, Hash, EllipsisVertical, TrendingUp, TrendingDown, RefreshCcw } from 'lucide-vue-next';
 
 const settings = useSettingsStore()
 const counters = useCountersStore()
@@ -34,6 +34,11 @@ const toggleOptions = () => {
                 </button>
                 <button v-if="!counters.mostPointFirst" class="--btn-icon" @click="counters.mostPointWin()">
                     <TrendingDown />
+                </button>
+            </div>
+            <div>
+                <button class="--btn-icon" @click="counters.resetCounters()">
+                    <RefreshCcw />
                 </button>
             </div>
         </div>
