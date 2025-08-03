@@ -1,3 +1,13 @@
+[V1.0.3]  
+> 💄 Polish a bit ?
+
+### Added
+- Add a button to reset all counters. Easier to reset a game with 500+ players.
+
+### Changed
+- Change winner displaying, a bit of fun yay.
+- Adjust some text/button size, for my fellow old brudas.
+
 [V1.0.2]  
 > 🐛 Meh
 
