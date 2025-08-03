@@ -60,6 +60,7 @@ const decrement = () => {
         overflow: hidden;
         text-overflow: ellipsis;
         color: var(--clr-white);
+        font-size: 2em;
     }
 }
 </style>
