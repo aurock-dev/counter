@@ -48,6 +48,12 @@ export const useCountersStore = defineStore('counters', () => {
         updateWinners();
     }
 
+    function resetCounters() {
+        counters.value.forEach(counter => {
+            counter.count = 0
+        });
+    }
+
     function mostPointWin() {
         mostPointFirst.value = true;
         updateWinners();
@@ -93,6 +99,7 @@ export const useCountersStore = defineStore('counters', () => {
         createCounter,
         updateCounter,
         deleteCounter,
+        resetCounters,
         winnerGradient,
         colorList,
         mostPointFirst,

@@ -1,6 +1,6 @@
 <script setup>
 import { ref, computed } from 'vue'
-import { Trash2, EllipsisVertical, Check, Minus, Plus, RotateCw, Circle, Crown } from 'lucide-vue-next'
+import { Trash2, EllipsisVertical, Check, RotateCw, Circle, Crown } from 'lucide-vue-next'
 import { useCountersStore } from '@/store/counters'
 import CounterButtons from './CounterButtons.vue'
 
@@ -57,7 +57,8 @@ const changeColor = (color) => {
 
 <template>
     <div class="counter"
-        :style="{ transform: rotated ? 'rotate(180deg)' : 'rotate(0deg)', backgroundColor: currentColor }">
+    :style="{ transform: rotated ? 'rotate(180deg)' : 'rotate(0deg)', backgroundColor: currentColor }">
+        <Crown v-if="currentCounter.winner && !isEditing" class="counter__winner" color="var(--clr-white)" />
         <div class="counter__header" :style="{ backgroundColor: currentColorHeader }">
             <div v-if="!isEditing" class="counter__option" :class="{ 'counter__option--open': optionsState }"
                 @click="toggleOptions">
@@ -85,13 +86,13 @@ const changeColor = (color) => {
                     <Check color="var(--clr-white)" @click="stopEditing" />
                 </div>
             </template>
-            <Crown v-if="currentCounter.winner && !isEditing" color="var(--clr-white)" />
         </div>
         <CounterButtons :id="props.id" />
     </div>
 </template>
 
 <style scoped>
+
 .counter {
     position: relative;
     display: flex;
@@ -104,6 +105,16 @@ const changeColor = (color) => {
     background-color: var(--clr-grey-500);
     box-shadow: var(--counter-shadow);
     overflow: hidden;
+
+    .counter__winner {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -40%) rotate(-20deg);
+        width: 45%;
+        height: auto;
+        filter: opacity(0.2);
+    }
 
     .counter__header {
         display: flex;
@@ -145,6 +156,7 @@ const changeColor = (color) => {
 
             .counter__name--p {
                 text-overflow: ellipsis;
+                font-size: 1.2em;
             }
         }
 
